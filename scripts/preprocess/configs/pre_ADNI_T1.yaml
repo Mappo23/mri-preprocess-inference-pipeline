@@ -1,0 +1,11 @@
+pipeline:
+  - type: dcm2niix
+  - type: reorient
+    params:
+      orientation: LIA
+  - type: resample
+    params:
+      spacing: [1.0, 1.0, 1.0]
+      tolerance: 0.05
+  - type: synthstrip
+  - type: qc

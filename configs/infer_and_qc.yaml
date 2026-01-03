@@ -1,0 +1,8 @@
+pipeline:
+  - type: dldirect
+
+  - type: qc_roi
+    params:
+      roi_labels: [11, 53, 41]
+      slice_mode: axial
+      alpha: 0.4

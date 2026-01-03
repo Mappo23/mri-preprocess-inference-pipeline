@@ -1,0 +1,22 @@
+import numpy as np
+import nibabel as nib
+import matplotlib.pyplot as plt
+
+def save_qc_png(ctx):
+    img = nib.load(str(ctx["image"]))
+    data = img.get_fdata()
+
+    z = data.shape[2] // 2
+    slice_img = data[:, :, z]
+
+    plt.figure(figsize=(5, 5))
+    plt.imshow(slice_img.T, cmap="gray", origin="lower")
+
+    if ctx.get("mask") is not None:
+        mask = nib.load(str(ctx["mask"])).get_fdata()
+        plt.contour(mask[:, :, z].T, colors="r", linewidths=0.5)
+
+    plt.axis("off")
+    out = ctx["work_dir"] / "qc_mid_slice.png"
+    plt.savefig(out, bbox_inches="tight", dpi=150)
+    plt.close()
