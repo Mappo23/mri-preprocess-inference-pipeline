@@ -10,8 +10,10 @@ class SynthStripStep(Step):
             "mri_synthstrip",
             "-i", str(ctx["image"]),
             "-o", str(brain),
-            "-m", str(mask)
+            "-m", str(mask),
+            "--gpu"
         ]
+
         subprocess.run(cmd, check=True)
 
         ctx["image"] = brain

@@ -25,10 +25,12 @@ class QCStep(Step):
         slice_img = data[:, :, z]
 
         plt.figure(figsize=(5, 5))
-        plt.imshow(slice_img, cmap="gray")
+        #plt.imshow(slice_img, cmap="gray")
+        plt.imshow(slice_img.T, cmap="gray", origin="lower")
+
 
         if mask is not None:
-            plt.contour(mask[:, :, z], colors="r", linewidths=0.25)
+            plt.contour(mask[:, :, z].T, colors="r", linewidths=0.25)
 
         plt.axis("off")
         out = ctx["work_dir"] / "qc_mid_brain_slice.png"

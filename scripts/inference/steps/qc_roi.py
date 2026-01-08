@@ -117,5 +117,8 @@ class QCRoiStep(Step):
 
             qc_outputs.append(str(out_png))
 
+        done_flag = ctx["work_dir"]  / "PIPELINE_DONE.ok"
+        done_flag.touch()
+
         ctx["qc_roi"] = qc_outputs
         return ctx
